@@ -7,13 +7,16 @@ shinyUI(fluidPage(
     sidebarPanel(
       selectInput("team1", 
                   label = "Select an IPL team to analyse",
-                  choices = c("Mumbai", "Pune"),
+                  choices = c("Deccan", "Delhi", "Punjab", "Kochi", "Kolkata", "Rajasthan", "Bangalore", "Hyderabad", "Chennai", "Mumbai", "Pune"),
                   selected = "Mumbai"),
       selectInput("team2", 
                   label = "Select an opposition IPL team (leave blank if all teams)",
                   choices = c("Chennai Super Kings", "Rajasthan Royals"),
                   selected = "Chennai Super Kings"),
-      
+      selectInput("statistic", 
+                  label = "Select a statistic",
+                  choices = c("runs", "sixes", "fours", "ballsPlayed"),
+                  selected = "runs"),
       br(),
       br(),
       
@@ -27,3 +30,4 @@ shinyUI(fluidPage(
     mainPanel(plotOutput("plot"))
   )
 ))
+
