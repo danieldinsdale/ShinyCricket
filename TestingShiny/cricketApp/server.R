@@ -1,13 +1,8 @@
 library(yorkr)
 library(cricketr)
 
-Kohli <- getPlayerData(253802,dir="..",file="Kohli.csv",type="batting",homeOrAway=c(1,2),
-                           result=c(1,2,4))
-convertYaml2RDataframeT20("335982.yaml",".",".") 
-
 setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-team-allMatches-allOppostions")
-load("allMatchesAllOpposition-Chennai Super Kings.RData")
-csk_Allmatches <- matches
+
 load("allMatchesAllOpposition-Deccan Chargers.RData")
 dc_Allmatches <- matches
 load("allMatchesAllOpposition-Delhi Daredevils.RData")
@@ -19,20 +14,29 @@ ktk_Allmatches <- matches
 load("allMatchesAllOpposition-Kolkata Knight Riders.RData")
 kkr_Allmatches <- matches
 load("allMatchesAllOpposition-Mumbai Indians.RData")
-mi_Allmatches <- matches
+Mumbai_Allmatches <- matches
 load("allMatchesAllOpposition-Pune Warriors.RData")
-pw_Allmatches <- matches
+Pune_Allmatches <- matches
 load("allMatchesAllOpposition-Rajasthan Royals.RData")
 rr_Allmatches <- matches
 load("allMatchesAllOpposition-Royal Challengers Bangalore.RData")
 rcb_Allmatches <- matches
-load("allMatchesAllOpposition-Sunrisers Hyderabad.RData")
+load("allMatchesAllOpposition-Hyderabad.RData")
 sh_Allmatches <- matches
-load("allMatchesAllOpposition-Chennai Super Kings.RData")
-CSK <- matches
+load("allMatchesAllOpposition-Chennai.RData")
+csk_Allmatches <- matches
 
-
-
-
-m <-teamBattingScorecardAllOppnAllMatches(csk_Allmatches,theTeam="Chennai Super Kings")
-m <-teamBattingScorecardAllOppnAllMatches(matches=csk_Allmatches,theTeam="Royal Challengers Bangalore")
+shinyServer(function(input, output) {
+  output$plot <- renderPlot({
+    # if(input$team == "Pune"){
+    #   teamStats <- teamBattingScorecardAllOppnAllMatches(pw_Allmatches,theTeam="Chennai Super Kings")
+    # }  else{
+    #   teamStats <- teamBattingScorecardAllOppnAllMatches(mi_Allmatches,theTeam="Chennai Super Kings")
+    # }
+    
+    args <- switch(input$team1,
+                   "Mumbai" = teamBattingScorecardAllOppnAllMatches(Mumbai_Allmatches,theTeam=input$team2),
+                   "Pune" = teamBattingScorecardAllOppnAllMatches(Pune_Allmatches,theTeam=input$team2))
+    plot(args$runs)
+  })
+})
