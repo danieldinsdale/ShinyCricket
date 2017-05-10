@@ -16,3 +16,9 @@ percent_map(counties$white, "darkgreen", "% White")
 
 # lesson 6
 runApp("stockVis", display.mode = "showcase")
+
+
+# run cricket app
+runApp("cricketApp", display.mode = "showcase")
+
+runApp("cricketApp")

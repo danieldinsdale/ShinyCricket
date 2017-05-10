@@ -36,3 +36,10 @@ CSK <- matches
 
 m <-teamBattingScorecardAllOppnAllMatches(csk_Allmatches,theTeam="Chennai Super Kings")
 m <-teamBattingScorecardAllOppnAllMatches(matches=csk_Allmatches,theTeam="Royal Challengers Bangalore")
+plot(m$batsman,m$runs)
+
+
+batTable$batsman=reorder(batTable$batsman, batTable$runs)
+ggplot(batTable, aes(batsman, runs)) +
+  geom_point(size = 3) + 
+  coord_flip()
