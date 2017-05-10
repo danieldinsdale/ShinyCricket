@@ -1,6 +1,6 @@
 library(yorkr)
 library(cricketr)
-
+source('cricketFunctions.R')
 setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-team-allMatches-allOppostions")
 
 load("allMatchesAllOpposition-Deccan.RData")
@@ -26,9 +26,22 @@ Hyderabad_Allmatches <- matches
 load("allMatchesAllOpposition-Chennai.RData")
 Chennai_Allmatches <- matches
 
+
 shinyServer(function(input, output) {
   output$plot <- renderPlot({
-    args = teamBattingScorecardAllOppnAllMatches(get(paste0(input$team1,"_Allmatches")),theTeam=input$team2)
-    plot(args$runs)
+    args = teamBattingScorecardAllOppnAllMatches(get(findAbbrev(input$team1)),theTeam=input$team2)
+    plot(plotFnc(args, input$statistic))
   })
 })
+
+
+# shinyServer(function(input, output) {
+#   output$plot <- renderPlot({
+#     args = teamBattingScorecardAllOppnAllMatches(get(paste0(input$team1,"_Allmatches")),theTeam=input$team2)
+#     plot(args$runs)
+#   })
+# })
+# 
+
+
+#apropos(strsplit("Rising Pune Supergiants", split=" ")[[1]])
