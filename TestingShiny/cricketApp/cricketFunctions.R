@@ -13,9 +13,9 @@ findAbbrev <- function(inputName){
 # this function takes the current data set and determines which statistic to plot
 # data is the scoreboard input and stat is which statistic to return from that data
 plotFnc <- function(data, stat){
-   if(stat == "runs") return(data$runs)
-   if(stat == "sixes") return(data$sixes)
-   if(stat == "fours") return(data$fours)
-   if(stat == "ballsPlayed") return(data$ballsPlayed)
+   if(stat == "Runs") return(data$runs)
+   if(stat == "Sixes") return(data$sixes)
+   if(stat == "Fours") return(data$fours)
+   if(stat == "Balls Played") return(data$ballsPlayed)
 }
 

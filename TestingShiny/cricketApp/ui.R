@@ -19,7 +19,7 @@ shinyUI(fluidPage(
                   selected = "Royal Challengers Bangalore"),
       selectInput("statistic", 
                   label = "Select a statistic",
-                  choices = c("runs", "sixes", "fours", "ballsPlayed"),
+                  choices = c("Runs", "Sixes", "Fours", "Balls Played"),
                   selected = "runs"),
       br(),
       br(),
