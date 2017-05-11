@@ -12,7 +12,6 @@ shinyServer(function(input, output) {
   
   output$plot <- renderPlot({
     plotFncV2(teamData(), input$statistic)
-    #plot(plotFnc(teamData(), input$statistic))
   })
 })
 

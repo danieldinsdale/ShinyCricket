@@ -1,10 +1,10 @@
 library(shiny)
 
 shinyUI(fluidPage(
-  titlePanel("IPL Statistics"),
   
-  sidebarLayout(
-    sidebarPanel(
+  titlePanel(title=div("IPL Statistics", img(src="IPLLogo.jpg", width=100))),
+  fluidRow(
+    column(4, wellPanel(
       selectInput("team1", 
                   label = "Select an IPL team to analyse",
                   choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
@@ -20,18 +20,10 @@ shinyUI(fluidPage(
       selectInput("statistic", 
                   label = "Select a statistic",
                   choices = c("Runs", "Sixes", "Fours", "Balls Played"),
-                  selected = "runs"),
-      br(),
-      br(),
-      
-      checkboxInput("log", "Plot y axis on log scale", 
-                    value = FALSE),
-      
-      checkboxInput("adjust", 
-                    "Adjust prices for inflation", value = FALSE)
-    ),
-    
-    mainPanel(plotOutput("plot"))
+                  selected = "runs")
+    )),
+    column(4,
+           mainPanel(plotOutput("plot", width = 600))
+    )
   )
 ))
-
