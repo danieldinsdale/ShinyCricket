@@ -1,4 +1,4 @@
-setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-team-allMatches-allOppostions")
+#setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-team-allMatches-allOppostions")
 load("allMatchesAllOpposition-Deccan.RData")
 Deccan_Allmatches <- matches
 load("allMatchesAllOpposition-Delhi.RData")

@@ -22,3 +22,7 @@ runApp("stockVis", display.mode = "showcase")
 runApp("cricketApp", display.mode = "showcase")
 
 runApp("cricketApp")
+# deploy app
+
+library(rsconnect)
+deployApp('cricketApp')
