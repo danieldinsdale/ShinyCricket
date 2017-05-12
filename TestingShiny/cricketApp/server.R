@@ -16,20 +16,33 @@ shinyServer(function(input, output) {
     scorecard %<>% dplyr::mutate(strikeRate = runs / ballsPlayed)
     return(scorecard)
   })
+  # output$teamLogo <- renderPlot({
+  #   img(src="Mumbai.png", width=100)
+  #   #plot(4,5)
+  # })
   
+  
+  output$teamLogo <- renderImage({
+    if (input$team1 == "Mumbai Indians") {
+      return(list(
+        src = "www/Mumbai.png",
+        contentType = "image/png",
+        width = 100,
+        #height = 100,
+        alt = "Mumbai"
+      ))
+    } else{
+      return(list(
+        src = "www/RajasthanLogo.svg",
+        filetype = "image/svg",
+        width = 100,
+        alt = "Not Mumbai"
+      ))
+    }
+    
+  }, deleteFile = FALSE)
   output$plot <- renderPlot({
     plotFnc(teamData(), input$statistic, input$sliderMinBalls)
   })
 })
 
-
-# shinyServer(function(input, output) {
-#   output$plot <- renderPlot({
-#     args = teamBattingScorecardAllOppnAllMatches(get(paste0(input$team1,"_Allmatches")),theTeam=input$team2)
-#     plot(args$runs)
-#   })
-# })
-# 
-
-
-#apropos(strsplit("Rising Pune Supergiants", split=" ")[[1]])

@@ -25,7 +25,8 @@ shinyUI(fluidPage(
                   min = 0, max = 100, value = 0)
     )),
     column(4,
-           mainPanel(plotOutput("plot", width = 600))
+           mainPanel(plotOutput("plot", width = 600)),
+           mainPanel(plotOutput("teamLogo", width = 20))
     )
   )
 ))
