@@ -19,8 +19,10 @@ shinyUI(fluidPage(
                   selected = "Royal Challengers Bangalore"),
       selectInput("statistic", 
                   label = "Select a statistic",
-                  choices = c("Runs", "Sixes", "Fours", "Balls Played"),
-                  selected = "runs")
+                  choices = c("Runs", "Strike Rate", "Sixes", "Fours", "Balls Played"),
+                  selected = "Runs"),
+      sliderInput("sliderMinBalls", label = h3("Minimum Balls Faced"),
+                  min = 0, max = 100, value = 0)
     )),
     column(4,
            mainPanel(plotOutput("plot", width = 600))

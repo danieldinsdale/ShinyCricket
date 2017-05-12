@@ -6,6 +6,7 @@ Kohli <- getPlayerData(253802,dir="..",file="Kohli.csv",type="batting",homeOrAwa
 convertYaml2RDataframeT20("335982.yaml",".",".") 
 
 setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-team-allMatches-allOppostions")
+setwd("~/UBC/ShinyCricket/TestingShiny/cricketApp")
 load("allMatchesAllOpposition-Chennai Super Kings.RData")
 csk_Allmatches <- matches
 load("allMatchesAllOpposition-Deccan Chargers.RData")
@@ -38,8 +39,4 @@ m <-teamBattingScorecardAllOppnAllMatches(csk_Allmatches,theTeam="Chennai Super 
 m <-teamBattingScorecardAllOppnAllMatches(matches=csk_Allmatches,theTeam="Royal Challengers Bangalore")
 plot(m$batsman,m$runs)
 
-
-batTable$batsman=reorder(batTable$batsman, batTable$runs)
-ggplot(batTable, aes(batsman, runs)) +
-  geom_point(size = 3) + 
-  coord_flip()
+ggplot(m, aes(batsman, ballsPlayed)) +  geom_point(size = 3) +  coord_flip()

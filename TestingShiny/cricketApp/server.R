@@ -1,17 +1,24 @@
 library(yorkr)
 library(cricketr)
 library(ggplot2)
+library(dplyr)
+library(magrittr)
 source('cricketFunctions.R')
 source('cricketData.R')
 
 shinyServer(function(input, output) {
   
   teamData <- reactive({  
-    teamBattingScorecardAllOppnAllMatches(get(findAbbrev(input$team1)),theTeam=input$team2)
+    scorecard <- teamBattingScorecardAllOppnAllMatches(get(findAbbrev(input$team1)),theTeam=input$team2)
+    scorecard[is.na(scorecard)] <- 0
+    # scorecard$strikeRate <- scorecard$runs/scorecard$ballsPlayed
+
+    scorecard %<>% dplyr::mutate(strikeRate = runs / ballsPlayed)
+    return(scorecard)
   })
   
   output$plot <- renderPlot({
-    plotFncV2(teamData(), input$statistic)
+    plotFnc(teamData(), input$statistic, input$sliderMinBalls)
   })
 })
 

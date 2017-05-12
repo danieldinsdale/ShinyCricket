@@ -1,5 +1,8 @@
 library(shiny)
 #runExample("01_hello")
+#laptop
+setwd("~/UBC/ShinyCricket/TestingShiny")
+#PC
 setwd("C:/Users/Daniel/OneDrive/My Documents/UBC/ShinyCricket/TestingShiny")
 # run app normally
 runApp("firstApp")
@@ -24,5 +27,5 @@ runApp("cricketApp", display.mode = "showcase")
 runApp("cricketApp")
 # deploy app
 
-library(rsconnect)
-deployApp('cricketApp')
+#library(rsconnect)
+#deployApp('cricketApp')
