@@ -34,3 +34,35 @@ plotFnc <- function(data, stat, minBalls){
              ylab(stat) + xlab("Batsman") + coord_flip())
   } 
 }
+# this function takes the image UI file and finds the file name used
+findImage <- function(inputName){
+  fullName <- unlist(strsplit(inputName, split=" "))
+  for(j in 1:length(fullName)){
+    abbreviationName <- list.files(path = "www/", pattern = fullName[j], full.names = T)
+    if(length(abbreviationName)>0) break
+  }
+  return(abbreviationName)
+}
+
+# this function finds the URL of player portrait give the cricinfo players' URL
+portraitURL <- function(urlWeb){
+  playerURL <- read_html(urlWeb)
+  linkNodes <- html_nodes(playerURL, "link")
+  imageColumn <- grep('image_src', linkNodes)
+  portrait <- unlist(html_attrs(linkNodes[imageColumn]))[[2]] 
+  return(portrait)
+}
+# finds cricinfo page URL for player input
+findWebsite <- function(player){
+  playerName <- paste(player, "cricinfo")
+  searchURL <- URLencode(paste0("https://www.google.com/search?q=",playerName))
+  cricinfoPage <- read_html(searchURL)
+  cricinfoURL <- paste("http://",html_text(html_nodes(cricinfoPage, "cite"))[1], sep="")
+  return(cricinfoURL)
+} 
+# combines the cricinfo URL and image URL search. Finds image URL 
+playerImageURLFull <- function(player){
+  cricinfoURL <- findWebsite(player)
+  finalURL <- portraitURL(cricinfoURL)
+  return(finalURL)
+}
