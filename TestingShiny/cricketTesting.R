@@ -112,4 +112,30 @@ findWebsite <- function(player){
 
 
 
+################################
+setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-matches")
+csk_batting <- getTeamBattingDetails("Chennai Super Kings",dir=".", save=TRUE)
+dd_batting <- getTeamBattingDetails("Delhi Daredevils",dir=".",save=TRUE)
+kkr_batting <- getTeamBattingDetails("Kolkata Knight Riders",dir=".",save=TRUE)
+mi_batting <- getTeamBattingDetails("Mumbai Indians",dir=".",save=TRUE)
+rcb_batting <- getTeamBattingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
 
+csk_bowling <- getTeamBowlingDetails("Chennai Super Kings",dir=".", save=TRUE)
+dd_bowling <- getTeamBowlingDetails("Delhi Daredevils",dir=".",save=TRUE)
+kkr_bowling <- getTeamBowlingDetails("Kolkata Knight Riders",dir=".",save=TRUE)
+mi_bowling <- getTeamBowlingDetails("Mumbai Indians",dir=".",save=TRUE)
+rcb_bowling <- getTeamBowlingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
+
+sehwag <-  getBatsmanDetails(team="Delhi Daredevils",name="V Sehwag",dir=".")
+p1 <-batsmanRunsVsDeliveries(sehwag,"V Sehwag")
+plot(p1)
+sehwag46 <- select(sehwag,batsman,ballsPlayed,fours,sixes,runs)
+p2 <-batsmanFoursSixes(sehwag46,"V Sehwag")
+plot(p2)
+p3 <-yorkr::batsmanDismissals(sehwag,"V Sehwag")
+plot(p3)
+
+harbhajan <-  getBowlerWicketDetails(team="Mumbai Indians",name="Harbhajan Singh",dir=".")
+
+p4<-bowlerMeanEconomyRate(harbhajan, "Harbhajan Singh")
+plot(p4)

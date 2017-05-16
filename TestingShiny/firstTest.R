@@ -3,7 +3,7 @@ library(shiny)
 #laptop
 setwd("~/UBC/ShinyCricket/TestingShiny")
 #PC
-setwd("C:/Users/Daniel/OneDrive/My Documents/UBC/ShinyCricket/TestingShiny")
+setwd("~/UBC/ShinyCricket/TestingShiny")
 # run app normally
 runApp("firstApp")
 # run app with code visible
