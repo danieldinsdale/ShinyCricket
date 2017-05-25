@@ -40,5 +40,11 @@ shinyServer(function(input, output) {
   output$plot <- renderPlot({
     plotFnc(teamData(), input$statistic, input$sliderMinBalls)
   })
+  
+  output$bowlerPlot <- renderPlot({
+    bowlerStats <- getBowlerWicketDetails(team=input$bowlingTeam, name="SM Pollock",dir=".")
+    bowlingPlot <- bowlerMeanEconomyRate(bowlerStats, "SM Pollock")
+    return(bowlingPlot)
+  })
 })
 

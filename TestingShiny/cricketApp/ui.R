@@ -5,6 +5,7 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      menuItem("Bowling Analysis", tabName = "bowlingAnalysis", icon = icon("th")),
       menuItem("Player Statistics", tabName = "players", icon = icon("th"))
     )
   ),
@@ -41,6 +42,21 @@ dashboardPage(
                   )
                 )
               )
+      ),
+      tabItem(tabName = "bowlingAnalysis",
+              fluidRow(
+                column(4,
+                       selectInput("bowlingTeam", 
+                                   label = "Select an IPL team to analyse",
+                                   choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
+                                               "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad", "Chennai Super Kings", 
+                                               "Mumbai Indians", "Pune Warriors"),
+                                   selected = "Mumbai Indians")
+                )
+              ),
+              column(4,
+                     mainPanel(plotOutput("bowlerPlot", width = 600))
+          )
       ),
       tabItem(tabName = "players",
               fluidRow(

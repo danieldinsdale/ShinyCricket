@@ -21,3 +21,5 @@ load("allMatchesAllOpposition-Hyderabad.RData")
 Hyderabad_Allmatches <- matches
 load("allMatchesAllOpposition-Chennai.RData")
 Chennai_Allmatches <- matches
+load("Mumbai Indians-BowlingDetails.RData")
+mi_bowling <- bowlingDetails

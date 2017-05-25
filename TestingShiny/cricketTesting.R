@@ -139,3 +139,9 @@ harbhajan <-  getBowlerWicketDetails(team="Mumbai Indians",name="Harbhajan Singh
 
 p4<-bowlerMeanEconomyRate(harbhajan, "Harbhajan Singh")
 plot(p4)
+
+
+unique(mi_bowling$bowler)
+bowlerStats <- getBowlerWicketDetails(team="Mumbai Indians",name="SM Pollock",dir=".")
+bowlingPlot <- bowlerMeanEconomyRate(bowlerStats, "SM Pollock")
+plot(bowlingPlot)
