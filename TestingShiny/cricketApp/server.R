@@ -53,11 +53,11 @@ shinyServer(function(input, output) {
                 choices = uiNew)
   })
   #grabs player portrait URL from cricinfo
-  playerImage <- reactive({
+  bowlerImage <- reactive({
     return(playerImageURLFull(input$bowlerSelect))
   })
   #plots player portrait from URL in playerImage
-  output$picture<-renderText({c('<img src="',playerImage(),'">')})
+  output$picture<-renderText({c('<img src="',bowlerImage(),'">')})
   
 })
 
