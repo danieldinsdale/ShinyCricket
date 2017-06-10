@@ -21,9 +21,6 @@ shinyServer(function(input, output) {
   team1Logo <- reactive({
     return(findImage(input$team1))
   })
-  playerImage <- reactive({
-    return(playerImageURLFull(input$cricketPortrait))
-  })
   # rendering
   output$teamLogo <- renderImage({
     return(list(
@@ -34,17 +31,33 @@ shinyServer(function(input, output) {
       alt = "Mumbai"
     ))
   }, deleteFile = FALSE)
-  # random player logo
-  output$picture<-renderText({c('<img src="',playerImage(),'">')})
-  
+  #code to plot team statistics
   output$plot <- renderPlot({
     plotFnc(teamData(), input$statistic, input$sliderMinBalls)
   })
-  
+  #code to plot bowler statistics given team and bowler name
   output$bowlerPlot <- renderPlot({
-    bowlerStats <- getBowlerWicketDetails(team=input$bowlingTeam, name="SM Pollock",dir=".")
-    bowlingPlot <- bowlerMeanEconomyRate(bowlerStats, "SM Pollock")
+    bowlerStats <- getBowlerWicketDetails(team=input$bowlingTeam, name=input$bowlerSelect,
+                                          dir=".")
+    bowlingPlot <- bowlerMeanEconomyRate(bowlerStats, input$bowlerSelect)
     return(bowlingPlot)
   })
+  #code to adapt UI with bowlers from selected IPL team
+  output$bowlerSelection <- renderUI({
+    team=input$bowlingTeam
+    fl <- paste(".", "/", team, "-BowlingDetails.RData", sep = "")
+    load(fl)
+    uiNew <- as.character(unique(bowlingDetails$bowler))
+    selectInput("bowlerSelect", 
+                label = "Select a player",
+                choices = uiNew)
+  })
+  #grabs player portrait URL from cricinfo
+  playerImage <- reactive({
+    return(playerImageURLFull(input$bowlerSelect))
+  })
+  #plots player portrait from URL in playerImage
+  output$picture<-renderText({c('<img src="',playerImage(),'">')})
+  
 })
 

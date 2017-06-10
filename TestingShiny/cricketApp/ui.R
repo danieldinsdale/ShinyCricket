@@ -55,19 +55,24 @@ dashboardPage(
                 )
               ),
               column(4,
+                     uiOutput("bowlerSelection"),
+                     htmlOutput("picture")
+              ),
+              column(4,
                      mainPanel(plotOutput("bowlerPlot", width = 600))
           )
-      ),
-      tabItem(tabName = "players",
-              fluidRow(
-                column(4,
-                       #mainPanel(plotOutput("plot", width = 600)),
-                       #mainPanel(plotOutput("teamLogo", width = 20)),
-                       textInput("cricketPortrait", "Random Cricket Player", value = "Tim Bresnan", width = NULL, placeholder = NULL),
-                       htmlOutput("picture")
-                )
-              )
       )
+      # ),
+      # tabItem(tabName = "players",
+      #         fluidRow(
+      #           column(4,
+      #                  #mainPanel(plotOutput("plot", width = 600)),
+      #                  #mainPanel(plotOutput("teamLogo", width = 20)),
+      #                  # textInput("cricketPortrait", "Random Cricket Player", value = "Tim Bresnan", width = NULL, placeholder = NULL),
+      #                  # htmlOutput("picture")
+      #           )
+      #         )
+      # )
     )
   )
 )
