@@ -1,12 +1,14 @@
 # this function takes the input name from the UI file and finds the abbreviation used
-# to find the yorkr name
-findAbbrev <- function(inputName){
+# to find the yorkr name. Dataset is either  
+# 1=AllMatches, 2=Batting, 3
+
+findAbbrev <- function(inputName, dataset){
   fullName <- unlist(strsplit(inputName, split=" "))
   for(j in 1:length(fullName)){
     abbreviationName <- apropos(fullName[j])
     if(length(abbreviationName)>0) break
   }
-  return(abbreviationName)
+  return(abbreviationName[[dataset]])
 }
 
 # this function plots data through ggplot2 ordering the batsmen by the statistic chosen

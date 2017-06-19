@@ -1,4 +1,5 @@
 library(shiny)
+library(shinydashboard)
 
 dashboardPage(
   dashboardHeader(title = div("IPL Statistics")),  
@@ -6,7 +7,7 @@ dashboardPage(
     sidebarMenu(
       menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
       menuItem("Bowling Analysis", tabName = "bowlingAnalysis", icon = icon("th")),
-      menuItem("Player Statistics", tabName = "players", icon = icon("th"))
+      menuItem("Batting Analysis", tabName = "batsmanAnalysis", icon = icon("th"))
     )
   ),
   dashboardBody(
@@ -56,11 +57,30 @@ dashboardPage(
               ),
               column(4,
                      uiOutput("bowlerSelection"),
-                     htmlOutput("picture")
+                     htmlOutput("bowlerPicture")
               ),
               column(4,
                      mainPanel(plotOutput("bowlerPlot", width = 600))
           )
+      ),
+      tabItem(tabName = "batsmanAnalysis",
+              fluidRow(
+                column(4,
+                       selectInput("batsmanTeam", 
+                                   label = "Select an IPL team to analyse",
+                                   choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
+                                               "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad", "Chennai Super Kings", 
+                                               "Mumbai Indians", "Pune Warriors"),
+                                   selected = "Mumbai Indians")
+                )
+              ),
+              column(4,
+                     uiOutput("batsmanSelection"),
+                     htmlOutput("batsmanPicture")
+              ),
+              column(4,
+                     mainPanel(plotOutput("batsmanPlot", width = 600))
+              )
       )
       # ),
       # tabItem(tabName = "players",

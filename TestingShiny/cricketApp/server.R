@@ -4,14 +4,13 @@ library(ggplot2)
 library(dplyr)
 library(magrittr)
 library(rvest)
-library(shinydashboard)
 source('cricketFunctions.R')
 source('cricketData.R')
 
 shinyServer(function(input, output) {
   
   teamData <- reactive({  
-    scorecard <- teamBattingScorecardAllOppnAllMatches(get(findAbbrev(input$team1)),theTeam=input$team2)
+    scorecard <- teamBattingScorecardAllOppnAllMatches(get(findAbbrev(input$team1, 1)),theTeam=input$team2)
     scorecard[is.na(scorecard)] <- 0
     # scorecard$strikeRate <- scorecard$runs/scorecard$ballsPlayed
     
@@ -56,8 +55,35 @@ shinyServer(function(input, output) {
   bowlerImage <- reactive({
     return(playerImageURLFull(input$bowlerSelect))
   })
-  #plots player portrait from URL in playerImage
-  output$picture<-renderText({c('<img src="',bowlerImage(),'">')})
+  output$bowlerPicture<-renderText({c('<img src="',bowlerImage(),'">')})
+  ###################################################################
+  #batsman plots   ##################################################
+  ###################################################################
+  bowlerImage <- reactive({
+    return(playerImageURLFull(input$bowlerSelect))
+  })
+  
+  output$batsmanPlot <- renderPlot({
+    batsmanStats <- getBatsmanDetails(team=input$batsmanTeam, name=input$batsmanSelect,
+                                          dir=".")
+    batsmanPlot <- batsmanRunsVsDeliveries(batsmanStats, input$batsmanSelect)
+    return(batsmanPlot)
+  })
+  #code to adapt UI with bowlers from selected IPL team
+  output$batsmanSelection <- renderUI({
+    team=input$batsmanTeam
+    fl <- paste(".", "/", team, "-BattingDetails.RData", sep = "")
+    load(fl)
+    uiNew <- as.character(unique(battingDetails$batsman))
+    selectInput("batsmanSelect", 
+                label = "Select a player",
+                choices = uiNew)
+  })
+  #grabs player portrait URL from cricinfo
+  batsmanImage <- reactive({
+    return(playerImageURLFull(input$batsmanSelect))
+  })
+  output$batsmanPicture<-renderText({c('<img src="',batsmanImage(),'">')})
   
 })
 
