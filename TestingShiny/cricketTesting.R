@@ -114,17 +114,32 @@ findWebsite <- function(player){
 
 ################################
 setwd("C:/Users/Daniel/Downloads/yorkrData-master/yorkrData-master/IPL/IPL-T20-matches")
-csk_batting <- getTeamBattingDetails("Chennai Super Kings",dir=".", save=TRUE)
-dd_batting <- getTeamBattingDetails("Delhi Daredevils",dir=".",save=TRUE)
-kkr_batting <- getTeamBattingDetails("Kolkata Knight Riders",dir=".",save=TRUE)
-mi_batting <- getTeamBattingDetails("Mumbai Indians",dir=".",save=TRUE)
-rcb_batting <- getTeamBattingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
+Chennai_batting <- getTeamBattingDetails("Chennai Super Kings",dir=".", save=TRUE)
+Delhi_batting <- getTeamBattingDetails("Delhi Daredevils",dir=".",save=TRUE)
+Kolkata_batting <- getTeamBattingDetails("Kolkata Knight Riders",dir=".",save=TRUE)
+Mumbai_batting <- getTeamBattingDetails("Mumbai Indians",dir=".",save=TRUE)
+Bangalore_batting <- getTeamBattingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
 
-csk_bowling <- getTeamBowlingDetails("Chennai Super Kings",dir=".", save=TRUE)
-dd_bowling <- getTeamBowlingDetails("Delhi Daredevils",dir=".",save=TRUE)
-kkr_bowling <- getTeamBowlingDetails("Kolkata Knight Riders",dir=".",save=TRUE)
-mi_bowling <- getTeamBowlingDetails("Mumbai Indians",dir=".",save=TRUE)
-rcb_bowling <- getTeamBowlingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
+Deccan_batting <- getTeamBattingDetails("Deccan Chargers",dir=".",save=TRUE)
+Hyderabad_batting <- getTeamBattingDetails("Sunrisers Hyderabad",dir=".",save=TRUE)
+Punjab_batting <- getTeamBattingDetails("Kings XI Punjab",dir=".",save=TRUE)
+Kochi_batting <- getTeamBattingDetails("Kochi Tuskers Kerala",dir=".",save=TRUE)
+Rajasthan_batting <- getTeamBattingDetails("Rajasthan Royals",dir=".",save=TRUE)
+Pune_batting <- getTeamBattingDetails("Pune Warriors",dir=".",save=TRUE)
+
+#
+Chennai_bowling <- getTeamBowlingDetails("Chennai Super Kings",dir=".", save=TRUE)
+Delhi_bowling <- getTeamBowlingDetails("Delhi Daredevils",dir=".",save=TRUE)
+Kolkata_bowling <- getTeamBowlingDetails("Kolkata Knight Riders",dir=".",save=TRUE)
+Mumbai_bowling <- getTeamBowlingDetails("Mumbai Indians",dir=".",save=TRUE)
+Bangalore_bowling <- getTeamBowlingDetails("Royal Challengers Bangalore",dir=".",save=TRUE)
+
+Deccan_bowling <- getTeamBowlingDetails("Deccan Chargers",dir=".",save=TRUE)
+Hyderabad_bowling <- getTeamBowlingDetails("Sunrisers Hyderabad",dir=".",save=TRUE)
+Punjab_bowling <- getTeamBowlingDetails("Kings XI Punjab",dir=".",save=TRUE)
+Kochi_bowling <- getTeamBowlingDetails("Kochi Tuskers Kerala",dir=".",save=TRUE)
+Rajasthan_bowling <- getTeamBowlingDetails("Rajasthan Royals",dir=".",save=TRUE)
+Pune_bowling <- getTeamBowlingDetails("Pune Warriors",dir=".",save=TRUE)
 
 
 batsman = battingDetails = NULL
@@ -135,6 +150,9 @@ uiNew <- unique(battingDetails$batsman)
 i=61
 getBatsmanDetails(team="Delhi Daredevils",name=uiNew[i],dir=".")
 
+
+
+
 sehwag <-  getBatsmanDetails(team="Delhi Daredevils",name="V Sehwag",dir=".")
 p1 <-batsmanRunsVsDeliveries(sehwag,"V Sehwag")
 plot(p1)
@@ -143,6 +161,35 @@ p2 <-batsmanFoursSixes(sehwag46,"V Sehwag")
 plot(p2)
 p3 <-yorkr::batsmanDismissals(sehwag,"V Sehwag")
 plot(p3)
+
+
+
+NiceDismissals <- function (df, name) 
+{
+  batsman <- wicketKind <- dismissal <- NULL
+  DismissalType <- NULL
+  b <- select(df, batsman, wicketKind)
+  c <- summarise(group_by(b, batsman, wicketKind), dismissal = n())
+  d <- mutate(c, wicketKind = paste(wicketKind, "(", dismissal, 
+                                    ")", sep = ""))
+  names(d) <- c("batsman", "DismissalType", "dismissal")
+  plot.title = paste(name, "- Dismissal Summary")
+  pal = brewer.pal(7,"Set2") #scale_colour_brewer(palette = "Set2")
+  ggplot(d, aes(x = DismissalType, y = dismissal, fill = DismissalType)) + 
+    geom_bar(width = 1, stat = "identity") + #coord_polar("y", start = 0) + 
+    ggtitle(bquote(atop(.(plot.title), atop(italic("Data source:http://cricsheet.org/"),"")))) +
+    theme(plot.title = element_text(hjust = 0.5),
+          axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank()) + 
+    scale_fill_discrete(name = "Dismissal Type") +
+    labs(y = "Number of Dismissals") +
+    scale_fill_brewer(palette = "Set3")
+}
+p4 <- DannyDismissals(sehwag,"V Sehwag")
+plot(p4)
+
+
 
 harbhajan <-  getBowlerWicketDetails(team="Mumbai Indians",name="Harbhajan Singh",dir=".")
 

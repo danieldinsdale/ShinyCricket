@@ -68,3 +68,26 @@ playerImageURLFull <- function(player){
   finalURL <- portraitURL(cricinfoURL)
   return(finalURL)
 }
+# new version of function batsmanDismissals with nicer colours and layout
+NiceDismissals <- function (df, name) 
+{
+  batsman <- wicketKind <- dismissal <- NULL
+  DismissalType <- NULL
+  b <- select(df, batsman, wicketKind)
+  c <- summarise(group_by(b, batsman, wicketKind), dismissal = n())
+  d <- mutate(c, wicketKind = paste(wicketKind, "(", dismissal, 
+                                    ")", sep = ""))
+  names(d) <- c("batsman", "DismissalType", "dismissal")
+  plot.title = paste(name, "- Dismissal Summary")
+  pal = brewer.pal(7,"Set2") #scale_colour_brewer(palette = "Set2")
+  ggplot(d, aes(x = DismissalType, y = dismissal, fill = DismissalType)) + 
+    geom_bar(width = 1, stat = "identity") + #coord_polar("y", start = 0) + 
+    ggtitle(bquote(atop(.(plot.title), atop(italic("Data source:http://cricsheet.org/"),"")))) +
+    theme(plot.title = element_text(hjust = 0.5),
+          axis.title.x=element_blank(),
+          axis.text.x=element_blank(),
+          axis.ticks.x=element_blank()) + 
+    scale_fill_discrete(name = "Dismissal Type") +
+    labs(y = "Number of Dismissals") +
+    scale_fill_brewer(palette = "Set3")
+}
