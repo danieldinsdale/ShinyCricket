@@ -79,6 +79,10 @@ dashboardPage(
                      htmlOutput("batsmanPicture")
               ),
               column(4,
+                     selectInput("batsmanInfo", 
+                                   label = "Choose an analysis type",
+                                   choices = c("Dismissal Type", "Runs vs Deliveries"),#, "Boundary Analysis"),
+                                 selected = "Dismissal Type"),
                      mainPanel(plotOutput("batsmanPlot", width = 600))
               )
       )

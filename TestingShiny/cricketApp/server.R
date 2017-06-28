@@ -64,9 +64,9 @@ shinyServer(function(input, output) {
   })
   
   output$batsmanPlot <- renderPlot({
-    batsmanStats <- getBatsmanDetails(team=input$batsmanTeam, name=input$batsmanSelect,
-                                          dir=".")
-    batsmanPlot <- NiceDismissals(batsmanStats, input$batsmanSelect)
+    batsmanStats <- getBatsmanDetails(team=input$batsmanTeam, name=input$batsmanSelect,dir=".")
+    batsmanPlot <- batsmanPlotFnc(batsmanStats, input$batsmanSelect, input$batsmanInfo)
+    #batsmanPlot <- batsmanRunsVsDeliveries(batsmanStats, input$batsmanSelect)
     return(batsmanPlot)
   })
   #code to adapt UI with bowlers from selected IPL team

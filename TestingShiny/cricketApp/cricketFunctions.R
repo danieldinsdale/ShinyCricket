@@ -91,3 +91,18 @@ NiceDismissals <- function (df, name)
     labs(y = "Number of Dismissals") +
     scale_fill_brewer(palette = "Set3")
 }
+# function to select batsman analysis method
+batsmanPlotFnc <- function(batsmanStats, player, plotType){
+  if(plotType=="Dismissal Type"){
+    output <- NiceDismissals(batsmanStats, player)
+  }else{
+    if(plotType=="Runs vs Deliveries"){
+      output <- yorkr::batsmanRunsVsDeliveries(batsmanStats, player)
+    }else{
+      # if(plotType=="Boundary Analysis"){
+      #   output <- batsmanFoursSixes(batsmanStats, player)
+      # }else{}
+    }
+  }
+  return(output)
+}
