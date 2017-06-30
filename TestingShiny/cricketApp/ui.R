@@ -5,7 +5,7 @@ dashboardPage(
   dashboardHeader(title = div("IPL Statistics")),  
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      menuItem("Team Analysis", tabName = "teamAnalysis", icon = icon("th")),
       menuItem("Bowling Analysis", tabName = "bowlingAnalysis", icon = icon("th")),
       menuItem("Batting Analysis", tabName = "batsmanAnalysis", icon = icon("th"))
     )
@@ -13,7 +13,7 @@ dashboardPage(
   dashboardBody(
     tabItems(
       # First tab content
-      tabItem(tabName = "dashboard",
+      tabItem(tabName = "teamAnalysis",
               fluidPage(
                 titlePanel(title=div(img(src="IPLLogo.jpg", width=100))),
                 fluidRow(
@@ -71,7 +71,7 @@ dashboardPage(
                                    choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
                                                "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad", "Chennai Super Kings", 
                                                "Mumbai Indians", "Pune Warriors"),
-                                   selected = "Mumbai Indians")
+                                   selected = "Delhi Daredevils")
                 )
               ),
               column(4,

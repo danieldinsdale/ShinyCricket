@@ -4,6 +4,7 @@ library(ggplot2)
 library(dplyr)
 library(magrittr)
 library(rvest)
+library(RColorBrewer)
 source('cricketFunctions.R')
 source('cricketData.R')
 
@@ -62,11 +63,13 @@ shinyServer(function(input, output) {
   bowlerImage <- reactive({
     return(playerImageURLFull(input$bowlerSelect))
   })
+  batsmanStats <- reactive({  
+    bat <- getBatsmanDetails(team=input$batsmanTeam, name=input$batsmanSelect,dir=".")
+    return(bat)
+  })
   
   output$batsmanPlot <- renderPlot({
-    batsmanStats <- getBatsmanDetails(team=input$batsmanTeam, name=input$batsmanSelect,dir=".")
-    batsmanPlot <- batsmanPlotFnc(batsmanStats, input$batsmanSelect, input$batsmanInfo)
-    #batsmanPlot <- batsmanRunsVsDeliveries(batsmanStats, input$batsmanSelect)
+    batsmanPlot <- batsmanPlotFnc(batsmanStats(), input$batsmanSelect, input$batsmanInfo)
     return(batsmanPlot)
   })
   #code to adapt UI with bowlers from selected IPL team
