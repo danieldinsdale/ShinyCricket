@@ -35,11 +35,19 @@ shinyServer(function(input, output) {
   output$plot <- renderPlot({
     plotFnc(teamData(), input$statistic, input$sliderMinBalls)
   })
+  ###################################################################
+  #bowler plots   ###################################################
+  ###################################################################
+  bowlerStats <- reactive({  
+    bowler <- getBowlerWicketDetails(team=input$bowlingTeam, name=input$bowlerSelect,dir=".")
+    return(bowler)
+  })
   #code to plot bowler statistics given team and bowler name
   output$bowlerPlot <- renderPlot({
-    bowlerStats <- getBowlerWicketDetails(team=input$bowlingTeam, name=input$bowlerSelect,
-                                          dir=".")
-    bowlingPlot <- bowlerMeanEconomyRate(bowlerStats, input$bowlerSelect)
+    #bowlerStats <- getBowlerWicketDetails(team=input$bowlingTeam, name=input$bowlerSelect,
+    #                                      dir=".") # bowlerMeanEconomyRate
+    bowlingPlot <- bowlerPlotFnc(bowlerStats(), input$bowlerSelect, input$bowlerInfo)
+    #batsmanPlot <- batsmanPlotFnc(batsmanStats(), input$batsmanSelect, input$batsmanInfo)
     return(bowlingPlot)
   })
   #code to adapt UI with bowlers from selected IPL team

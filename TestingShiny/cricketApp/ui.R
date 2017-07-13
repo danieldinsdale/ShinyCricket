@@ -60,6 +60,10 @@ dashboardPage(
                      htmlOutput("bowlerPicture")
               ),
               column(4,
+                     selectInput("bowlerInfo", 
+                                 label = "Choose an analysis type",
+                                 choices = c("Economy Rate", "Wickets vs Opposition", "Venue Record"),
+                                 selected = "Economy Rate"),
                      mainPanel(plotOutput("bowlerPlot", width = 600))
           )
       ),
@@ -81,7 +85,7 @@ dashboardPage(
               column(4,
                      selectInput("batsmanInfo", 
                                    label = "Choose an analysis type",
-                                   choices = c("Dismissal Type", "Runs vs Deliveries"),#, "Boundary Analysis"),
+                                   choices = c("Dismissal Type", "Runs vs Deliveries", "Opposition Record", "Venue Record"),
                                  selected = "Dismissal Type"),
                      mainPanel(plotOutput("batsmanPlot", width = 600))
               )
