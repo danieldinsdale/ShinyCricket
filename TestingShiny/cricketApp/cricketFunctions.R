@@ -102,16 +102,16 @@ NiceOpposition <- function (df, name)
   c <- b[complete.cases(b), ]
   d <- summarise(group_by(c, opposition), meanRuns = mean(runs), 
                  numMatches = n())
-  plot.title = paste(name, "- Runs against opposition")
+  plot.title = paste(name, "- Batting average against opposition")
   ggplot(d, aes(x = opposition, y = meanRuns, fill = opposition)) + 
     geom_bar(stat = "identity", position = "dodge") + xlab("Opposition") + 
-    ylab("Runs")  + 
+    ylab("Batting Average")  + 
     theme(plot.title = element_text(hjust = 0.5),
           axis.title.x=element_blank(),
           axis.text.x=element_blank(),
           axis.ticks.x=element_blank()) +
   scale_fill_brewer(palette = "Set3") +
-  labs(y = "Opposition") +
+  labs(y = "Batting Average") +
   ggtitle(bquote(atop(.(plot.title), atop(italic("Data source:http://cricsheet.org/"), ""))))
 }
 #
@@ -132,7 +132,7 @@ NiceVenue <- function (df, name){
   }
   colourCount = length(unique(f$venue))
   getPalette = colorRampPalette(brewer.pal(9, "Set3"))
-  plot.title = paste(name, "- Mean runs at venue")
+  plot.title = paste(name, "- Batting average at venue")
   ggplot(f, aes(x = venue, y = meanRuns, fill = venue)) +   coord_flip() + 
     geom_bar(stat = "identity", position = "dodge", fill=getPalette(colourCount)) + 
     #geom_hline(aes(yintercept = 50)) + 
@@ -140,7 +140,7 @@ NiceVenue <- function (df, name){
     theme(plot.title = element_text(hjust = 0.5),
           legend.position="none") +
     #scale_fill_brewer(palette = "Set3") +
-    labs(x = "Venue", y="Runs") +
+    labs(x = "Venue", y="Batting Average") +
     ggtitle(bquote(atop(.(plot.title), atop(italic("Data source:http://cricsheet.org/"), 
                                             ""))))
 }

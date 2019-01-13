@@ -6,8 +6,9 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Team Analysis", tabName = "teamAnalysis", icon = icon("bar-chart")),
-      menuItem("Bowling Analysis", tabName = "bowlingAnalysis", icon = icon("bar-chart")),
-      menuItem("Batting Analysis", tabName = "batsmanAnalysis", icon = icon("bar-chart")),
+      # bowling analysis is not ready yet
+      #menuItem("Bowling Analysis", tabName = "bowlingAnalysis", icon = icon("bar-chart")),
+      menuItem("Batsman Analysis", tabName = "batsmanAnalysis", icon = icon("bar-chart")),
       menuItem("Special Thanks", tabName = "specialThanks", icon = icon("bullhorn"))
       
     )
@@ -27,7 +28,7 @@ dashboardPage(
                                             "Mumbai Indians", "Pune Warriors"),
                                 selected = "Mumbai Indians"),
                     selectInput("team2", 
-                                label = "Select an opposition IPL team (leave blank if all teams)",
+                                label = "Select an opposition IPL team",
                                 choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
                                             "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad", "Chennai Super Kings", 
                                             "Mumbai Indians", "Pune Warriors"),
@@ -46,29 +47,30 @@ dashboardPage(
                 )
               )
       ),
-      tabItem(tabName = "bowlingAnalysis",
-              titlePanel(title=div(img(src="IPLLogo.jpg", width=100))),
-              fluidRow(
-                column(4,wellPanel( 
-                       selectInput("bowlingTeam", 
-                                   label = "Select an IPL team to analyse",
-                                   choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
-                                               "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad", "Chennai Super Kings", 
-                                               "Mumbai Indians", "Pune Warriors"),
-                                   selected = "Mumbai Indians"),
-                       uiOutput("bowlerSelection"),
-                       selectInput("bowlerInfo", 
-                                   label = "Choose an analysis type",
-                                   choices = c("Economy Rate", "Wickets vs Opposition", "Venue Record"),
-                                   selected = "Economy Rate")
-                ),
-                column(4,
-                       htmlOutput("bowlerPicture")
-              )),
-              column(4,
-                     mainPanel(plotOutput("bowlerPlot", width = 600))
-          )
-      )),
+      # Bowling analysis is not ready yet
+      # tabItem(tabName = "bowlingAnalysis",
+      #         titlePanel(title=div(img(src="IPLLogo.jpg", width=100))),
+      #         fluidRow(
+      #           column(4,wellPanel( 
+      #                  selectInput("bowlingTeam", 
+      #                              label = "Select an IPL team to analyse",
+      #                              choices = c("Deccan Chargers", "Delhi Daredevils", "Kings XI Punjab", "Kochi Tuskers Kerala", "Kolkata Knight Riders", 
+      #                                          "Rajasthan Royals", "Royal Challengers Bangalore", "Sunrisers Hyderabad", "Chennai Super Kings", 
+      #                                          "Mumbai Indians", "Pune Warriors"),
+      #                              selected = "Mumbai Indians"),
+      #                  uiOutput("bowlerSelection"),
+      #                  selectInput("bowlerInfo", 
+      #                              label = "Choose an analysis type",
+      #                              choices = c("Economy Rate", "Wickets vs Opposition", "Venue Record"),
+      #                              selected = "Economy Rate")
+      #           ),
+      #           column(4,
+      #                  htmlOutput("bowlerPicture")
+      #         )),
+      #         column(4,
+      #                mainPanel(plotOutput("bowlerPlot", width = 600))
+      #     )
+      # )),
       tabItem(tabName = "batsmanAnalysis",
               titlePanel(title=div(img(src="IPLLogo.jpg", width=100))),
               fluidRow(
